@@ -1,12 +1,17 @@
 package com.example.coreyb.univisionapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class PhoneBookActivity extends ActionBarActivity {
@@ -18,7 +23,7 @@ public class PhoneBookActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_book);
 
-
+/*
         // List of items
         String[] contacts = {
                 "Alex Fleig    x151", "Amanda Towsley    x100", "Brandon Frey    x260", "Chelsea Lang    x156",
@@ -34,6 +39,34 @@ public class PhoneBookActivity extends ActionBarActivity {
         ListView listView = (ListView) findViewById(R.id.employeeListView);
 // set the adapter to the view
         listView.setAdapter(adapter);
+*/
+
+        ArrayList<Contacts> contacts = new ArrayList<Contacts>();
+        contacts.add( new Contacts("Corey Batiuk", "x252") );
+        contacts.add( new Contacts("Name 2", "8888888888") );
+        contacts.add( new Contacts("Name 3", "7777777777") );
+        contacts.add( new Contacts("Name 4", "6666666666") );
+        contacts.add( new Contacts("Name 5", "5555555555") );
+        contacts.add( new Contacts("Name 6", "4444444444") );
+        contacts.add( new Contacts("Name 7", "3333333333") );
+        contacts.add( new Contacts("Name 8", "2222222222") );
+        contacts.add( new Contacts("Name 9", "1111111111") );
+        contacts.add(new Contacts("Name 10", "0000000000"));
+
+        CustomAdapter adapter = new CustomAdapter(this, contacts);
+
+        ListView listView = (ListView)findViewById(R.id.employeeListView);
+        listView.setAdapter(adapter);
+
+        listView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + 4062414894));
+                startActivity(callIntent);
+            }
+        });
+
 
 
     }
